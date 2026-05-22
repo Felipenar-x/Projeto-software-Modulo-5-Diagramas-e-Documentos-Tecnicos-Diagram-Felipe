@@ -1,4 +1,6 @@
-def generate_plantuml(classes):
+def generate_plantuml(classes, relationships=None):
+    relationships = relationships or []
+
     lines = ["@startuml"]
 
     for cls in classes:
@@ -11,10 +13,29 @@ def generate_plantuml(classes):
             lines.append(f"  {method}()")
 
         lines.append("}")
+        lines.append("")
+
+    for relationship in relationships:
+        relation_symbol = get_relationship_symbol(relationship.type)
+
+        lines.append(
+            f"{relationship.from_class} {relation_symbol} {relationship.to_class}"
+        )
 
     lines.append("@enduml")
 
     return "\n".join(lines)
+
+
+def get_relationship_symbol(relationship_type: str) -> str:
+    symbols = {
+        "inheritance": "--|>",
+        "implementation": "..|>",
+        "association": "-->",
+        "dependency": "..>"
+    }
+
+    return symbols.get(relationship_type, "-->")
 
 
 def generate_architecture_plantuml(project_name: str | None = None):

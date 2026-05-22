@@ -42,7 +42,10 @@ def health():
 
 @app.post("/generate/uml", response_model=UMLResponse)
 def generate_uml(request: UMLRequest):
-    plantuml = generate_plantuml(request.classes)
+    plantuml = generate_plantuml(
+    request.classes,
+    request.relationships
+)
 
     return {
         "plantuml": plantuml

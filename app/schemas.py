@@ -8,8 +8,15 @@ class UMLClass(BaseModel):
     methods: List[str]
 
 
+class UMLRelationship(BaseModel):
+    from_class: str
+    to_class: str
+    type: str
+
+
 class UMLRequest(BaseModel):
     classes: List[UMLClass]
+    relationships: Optional[List[UMLRelationship]] = []
 
 
 class UMLResponse(BaseModel):
