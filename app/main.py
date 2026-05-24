@@ -19,7 +19,7 @@ from app.services.plantuml_generator import (
 app = FastAPI(
     title="DoculA Diagram API",
     description="Microsserviço responsável por gerar diagramas técnicos em PlantUML.",
-    version="0.2.0"
+    version="1.0.0"
 )
 
 app.add_middleware(
@@ -36,7 +36,7 @@ def health():
     return {
         "status": "ok",
         "service": "docula-diagram-api",
-        "version": "0.2.0"
+        "version": "1.0.0"
     }
 
 
